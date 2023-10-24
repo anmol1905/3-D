@@ -105,8 +105,29 @@ function rotateOnTouchMove(e) {
     lastMove[1] = e.touches[0].clientY;
 }
 
+//callback function for mouse move event listener
+function rotateOnMouseMove(e) {
+    e = e || window.event;
+
+    //calculate difference between current and last mouse position
+    const moveX = ( e.clientX - lastMove[0]);
+    const moveY = ( e.clientY - lastMove[1]);
+
+    //rotate the sphere based on distance of mouse moves (x and y)
+    sphere.rotation.y += ( moveX * .005);
+    sphere.rotation.x += ( moveY * .005);
+
+    //store new position in lastMove
+    lastMove[0] = e.clientX;
+    lastMove[1] = e.clientY;
+}
+
+//on mousemove, call rotateOnMouseMove
+document.addEventListener('mousemove', rotateOnMouseMove);
+
 // On touchmove, call rotateOnTouchMove
 document.addEventListener('touchmove', rotateOnTouchMove);
+
 
 
 
