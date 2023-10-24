@@ -28,6 +28,87 @@ animate();
 // Set camera position
 camera.position.z = 15;
 
+//setting up our rotation based on arrow key
+function animationBuilder(direction) {
+    return function animateRotate() {
+        //based on key pressed, rotate +-x or +-y
+        switch (direction) {
+            case 'up':
+                sphere.rotation.x -= 0.1;
+                break;
+            case 'down':
+                sphere.rotation.x += 0.1;
+                break;
+            case 'left':
+                sphere.rotation.y -= 0.1;
+                break;
+            case 'right':
+                sphere.rotation.y += 0.1;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+//store animation call in directions object
+var animateDirection = {
+    up: animationBuilder('up'),
+    down: animationBuilder('down'),
+    left: animationBuilder('left'),
+    right: animationBuilder('right')
+}
+
+//callback function for key press event listener
+function checkKey(e) {
+
+    e = e || window.event;
+
+    e.preventDefault();
+
+    //based on keycode, trigger appropriate animation
+    if (e.keyCode == '38') {
+        animateDirection.up();
+    }
+    else if (e.keyCode == '40') {
+        animateDirection.down();
+    }
+    else if (e.keyCode == '37') {
+        animateDirection.left();
+    }
+    else if (e.keyCode == '39') {
+        animateDirection.right();
+    }
+}
+
+//on key down, call checkKey
+document.onkeydown = checkKey;
+
+
+//store our previous mouse move; start value is at center
+var lastMove = [window.innerWidth/2, window.innerHeight/2];
+
+//callback function for mouse move event listener
+function rotateOnMouseMove(e) {
+    e = e || window.event;
+
+    //calculate difference between current and last mouse position
+    const moveX = ( e.clientX - lastMove[0]);
+    const moveY = ( e.clientY - lastMove[1]);
+
+    //rotate the sphere based on distance of mouse moves (x and y)
+    sphere.rotation.y += ( moveX * .005);
+    sphere.rotation.x += ( moveY * .005);
+
+    //store new position in lastMove
+    lastMove[0] = e.clientX;
+    lastMove[1] = e.clientY;
+}
+
+//on mousemove, call rotateOnMouseMove
+document.addEventListener('mousemove', rotateOnMouseMove);
+
+
 // Handle window resizing
 window.addEventListener('resize', () => {
     const width = window.innerWidth;
