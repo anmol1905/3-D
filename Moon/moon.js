@@ -19,9 +19,9 @@ scene.add(sphere);
 
 // Set up rotation animation
 function animate() {
-  requestAnimationFrame(animate);
-  sphere.rotation.y += 0.01; // Adjust the speed of rotation here
-  renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+    sphere.rotation.y += 0.01; // Adjust the speed of rotation here
+    renderer.render(scene, camera);
 }
 animate();
 
@@ -30,9 +30,9 @@ camera.position.z = 15;
 
 // Handle window resizing
 window.addEventListener('resize', () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  renderer.setSize(width, height);
-  camera.aspect = width / height;
-  camera.updateProjectionMatrix();
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
 });
