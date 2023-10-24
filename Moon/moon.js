@@ -85,28 +85,29 @@ function checkKey(e) {
 document.onkeydown = checkKey;
 
 
-//store our previous mouse move; start value is at center
+// Store our previous touch move; start value is at center
 var lastMove = [window.innerWidth/2, window.innerHeight/2];
 
-//callback function for mouse move event listener
-function rotateOnMouseMove(e) {
+// Callback function for touch move event listener
+function rotateOnTouchMove(e) {
     e = e || window.event;
 
-    //calculate difference between current and last mouse position
-    const moveX = ( e.clientX - lastMove[0]);
-    const moveY = ( e.clientY - lastMove[1]);
+    // Calculate difference between current and last touch position
+    const moveX = ( e.touches[0].clientX - lastMove[0]);
+    const moveY = ( e.touches[0].clientY - lastMove[1]);
 
-    //rotate the sphere based on distance of mouse moves (x and y)
+    // Rotate the sphere based on distance of touch moves (x and y)
     sphere.rotation.y += ( moveX * .005);
     sphere.rotation.x += ( moveY * .005);
 
-    //store new position in lastMove
-    lastMove[0] = e.clientX;
-    lastMove[1] = e.clientY;
+    // Store new position in lastMove
+    lastMove[0] = e.touches[0].clientX;
+    lastMove[1] = e.touches[0].clientY;
 }
 
-//on mousemove, call rotateOnMouseMove
-document.addEventListener('mousemove', rotateOnMouseMove);
+// On touchmove, call rotateOnTouchMove
+document.addEventListener('touchmove', rotateOnTouchMove);
+
 
 
 // Handle window resizing
