@@ -22,7 +22,8 @@
     <meta property="twitter:description" content="A 3D moon created using Three.js">
     <meta property="twitter:image" content="https://3d-moon.vercel.app/thumbnail.png">
 
-    <link rel="icon" href="https://www.emoji.co.uk/files/apple-emojis/animals-nature-ios/325-crescent-moon.png" type="image/x-icon">
+    <link rel="icon" href="https://www.emoji.co.uk/files/apple-emojis/animals-nature-ios/325-crescent-moon.png"
+        type="image/x-icon">
 
     <title>Spinning Sphere with Image Texture</title>
     <style>
@@ -76,15 +77,24 @@
             color: rgb(234, 0, 0);
         }
     </style>
+    <script type="importmap">
+            {
+              "imports": {
+                "three": "https://unpkg.com/three@0.157.0/build/three.module.js"
+              }
+            }
+    </script>
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/@vercel/analytics@1.1.1/dist/index.min.js"></script>
     <script src="https://kit.fontawesome.com/591b481618.js" crossorigin="anonymous"></script>
-    <script src="https://threejs.org/build/three.min.js"></script>
-    <script src="moon.js"></script>
+    <script type="module"  src="moon.js"></script>
     <ul class="social-icons">
-        <li><a href="https://github.com/anmol1905" name="github" target="_blank"> <i class="fab fa-github"></i> </a></li>
-        <li><a href="https://www.linkedin.com/in/anveeg-sinha-669b801aa/" name="linkedin" target="_blank"> <i class="fab fa-linkedin"></i> </a></li>
+        <li><a href="https://github.com/anmol1905" aria-label="Github" target="_blank"> <i class="fab fa-github"></i> </a>
+        </li>
+        <li><a href="https://www.linkedin.com/in/anveeg-sinha-669b801aa/" aria-label="LinkedIn" target="_blank"> <i
+                    class="fab fa-linkedin"></i> </a></li>
         <!-- Add more social icons as needed -->
     </ul>
 

@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 // Set up the scene
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -17,13 +18,52 @@ const material = new THREE.MeshBasicMaterial({ map: texture });
 const sphere = new THREE.Mesh(geometry, material);
 scene.add(sphere);
 
+// Create a starfield
+const starGeometry = new THREE.BufferGeometry();
+const positions = [];
+
+for (let i = 0; i < 1000; i++) {
+    const x = THREE.MathUtils.randFloatSpread(1000);
+    const y = THREE.MathUtils.randFloatSpread(1000);
+    const z = THREE.MathUtils.randFloatSpread(1000);
+
+    positions.push(x, y, z);
+}
+
+starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 1 });
+
+const stars = new THREE.Points(starGeometry, starMaterial);
+scene.add(stars);
+
+// Animate Stars Hover and Blink
+function animateStars() {
+    stars.geometry.attributes.position.array.forEach((position, index) => {
+        stars.geometry.attributes.position.array[index] += (Math.random() - 0.5) * 0.1; // Adjust hover intensity
+    });
+
+    stars.geometry.attributes.position.needsUpdate = true;
+
+    starMaterial.opacity = Math.random(); // Adjust blink intensity
+
+    requestAnimationFrame(animateStars);
+}
+
+let rotationDirection = 1; // 1 for clockwise, -1 for counterclockwise
+
+animateStars();
 // Set up rotation animation
 function animate() {
     requestAnimationFrame(animate);
-    sphere.rotation.y += 0.01; // Adjust the speed of rotation here
+    sphere.rotation.y += 0.01 * rotationDirection; // Adjust the speed of rotation here
     renderer.render(scene, camera);
 }
 animate();
+
+document.addEventListener('click', () => {
+    rotationDirection *= -1; // Toggle rotation direction
+});
 
 // Set camera position
 camera.position.z = 15;
