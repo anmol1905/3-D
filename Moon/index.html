@@ -87,7 +87,10 @@
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/@vercel/analytics@1.1.1/dist/index.min.js"></script>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+      </script>
+      <script defer src="/_vercel/insights/script.js"></script>
     <script src="https://kit.fontawesome.com/591b481618.js" crossorigin="anonymous"></script>
     <script type="module"  src="moon.js"></script>
     <ul class="social-icons">
